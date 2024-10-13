@@ -22,3 +22,8 @@ while True:
     y = min(y + a, n - a)
 
 print(squares)
+
+# WHY
+# Long approach, and there are a smart one
+# CAUSE
+# I've not used MATH :(

@@ -45,3 +45,6 @@ int main()
 
   return 0;
 }
+
+// WHY
+// Error in data types
