@@ -1,56 +1,60 @@
+#include <bits/stdc++.h>
 #include <iostream>
-#include <vector>
+#include <math.h>
 
-using namespace std;
 typedef long long ll;
 
-vector<ll> getDivisors(ll n) {
-  vector<ll> divisors;
-    ll x = 2;
-    while (true) {
-      ll y = n / x;
+using namespace std;
 
-      if (n % x == 0 && y == 1) {
-	divisors.push_back(x);
-	break;
-      } else if (n % x == 0 && y % x == 0) {
-	divisors.push_back(x);
-	divisors.push_back(y);
-	break;
-      } else { 
-	x++;
-      }
+void solve() {
+  ll n;
+  cin >> n;
 
-      cout << "Runtime: " << "Y: " << y << "X: " << x << endl;
+  vector<pair<ll,ll>> v;
+
+  for (ll i = 2; i*i <=n; i++) {
+    int count = 0;
+
+    while (n % i == 0) {
+      n /= i;
+      count++;
     }
 
-  return divisors;
-}
+    if (count > 0) v.push_back({count, i});
+  }
 
-int main()
-{
-  int t;
-  cin >> t;
-  while (t--) {
-    ll n;
-    cin >> n;
-    vector<ll> a;
-    a.push_back(n);
-    while (true) {
-      cout << "Runtime: " << a.back() << endl;
-      vector<ll> divisors = getDivisors(a.back());
+  if (n > 1) v.push_back({1, n});
 
-      if (divisors.size() == 1) break;
+  sort(v.begin(), v.end());
+  reverse(v.begin(), v.end());
 
-      a.pop_back();
+  vector<ll> ans;
 
-      for (int i : divisors) a.push_back(i);
-    }
-
-    cout << a.size() << endl;
-    for (int i : a) {
-      cout << i << endl;
+  for (int i = 0; i < v[0].first; i++) {
+    ans.push_back(v[0].second);
+  }
+  for (int i = 1; i < (int)v.size(); i++) {
+    for (int j = 0; j < v[i].first; j++) {
+      ans[v[0].first - 1] *= v[i].second;
     }
   }
+
+  cout << v[0].first << endl;
+
+  for (auto i : ans) {
+    cout << i << " ";
+  }
+
+  cout << "\n";
+}
+
+int main() {
+  int t;
+  cin >> t;
+
+  while (t--) {
+    solve();
+  }
+
   return 0;
 }
