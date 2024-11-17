@@ -25,29 +25,21 @@ int main()
     li n;
     cin >> n;
     int x[n];
-    li j = n;
+    li mx = 0;
 
-    for (li i = 0; i < n; i++)
+    for (li i = 1; i <= n; i++)
     {
-      cin >> x[i];
-    }
+      cin >> x[i - 1];
 
-    for (li i = n; i >= 0; i--)
-    {
-      if (i == 0)
-      {
-        cout << -1 << endl;
-        break;
-      }
-
-      int result = gcd(x[i - 1], x[j - 1]);
-
-      if (result == 1)
-      {
-        cout << i + j << endl;
-        break;
+      for (li j = 1; j <= i; j++) {
+	if (gcd(x[j - 1], x[i - 1]) == 1) {
+	  mx = max(mx, j + i);
+	}
       }
     }
+
+    if (mx) cout << mx << endl;
+    else cout << -1 << endl;
   }
 
   return 0;
