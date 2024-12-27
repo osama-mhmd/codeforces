@@ -1,7 +1,6 @@
 function calculateWays(
   nums: number[],
   target: number,
-  currentWays = 0,
   currentIndex = 0,
   currentSum = 0
 ): number {
@@ -15,14 +14,12 @@ function calculateWays(
   const add = calculateWays(
     nums,
     target,
-    currentWays,
     currentIndex + 1,
     currentSum + nums[currentIndex]
   );
   const substract = calculateWays(
     nums,
     target,
-    currentWays,
     currentIndex + 1,
     currentSum - nums[currentIndex]
   );
